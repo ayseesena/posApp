@@ -13,11 +13,7 @@ const Add = ({isAddModalOpen, setIsAddModalOpen,categories,setProducts,products}
             body: JSON.stringify(values),
             headers: { "Content-type": "application/json; charset=UTF-8" },
           });
-<<<<<<< HEAD
           message.success("Ürün başarıyla eklendi.");
-=======
-          message.success("Kategori başarıyla eklendi.");
->>>>>>> fa0e25031 (first commit)
           form.resetFields();
          setProducts([...products,{
             ...values,
@@ -42,11 +38,7 @@ const Add = ({isAddModalOpen, setIsAddModalOpen,categories,setProducts,products}
             <Form.Item
             name="title"
             label="Ürün Adı "
-<<<<<<< HEAD
             rules={[{required: true, message: "Ürün Adı Zorunludur"}]}>
-=======
-            rules={[{required: true, message: "İsim Alanı Zorunludur"}]}>
->>>>>>> fa0e25031 (first commit)
                 <Input placeholder='Bir Ürün Adı Giriniz'/>
                 </Form.Item >
                 <Form.Item

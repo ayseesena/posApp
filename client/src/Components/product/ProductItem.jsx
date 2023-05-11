@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { message } from "antd";
 import { addProduct } from "../../redux/cartSlice";
 import { useDispatch} from "react-redux";
@@ -17,14 +16,6 @@ const ProductItem = ({ item }) => {
     
 <div className="product-item border  hover:shadow-lg cursor-pointer transition-all select-none"
     onClick={handleClick} >
-=======
-import React from 'react'
-
-const ProductItem = ({item}) => {
-  return (
-    
-<div className="product-item border  hover:shadow-lg cursor-pointer transition-all select-none">
->>>>>>> fa0e25031 (first commit)
            <div className="product-img">
              <img
              src={item.img}
