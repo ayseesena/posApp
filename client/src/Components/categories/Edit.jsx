@@ -8,7 +8,7 @@ const Edit = ({isEditModalOpen,setIsEditModalOpen,categories,setCategories}) => 
     const deleteCategory = (id)=>{
         if (window.confirm("Emin misiniz?")) {
             try {
-                fetch("http://localhost:5002/api/categories/delete-category",{
+                fetch(process.env.REACT_APP_SERVER_URL+"/api/categories/delete-category",{
                     method:"DELETE",
                     body:JSON.stringify({categoryId: id}),
                     headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -25,7 +25,7 @@ const Edit = ({isEditModalOpen,setIsEditModalOpen,categories,setCategories}) => 
 
     const onFinish=(values)=>{
         try{
-            fetch("http://localhost:5002/api/categories/update-category",
+            fetch(process.env.REACT_APP_SERVER_URL+"/api/categories/update-category",
             {
             method: "PUT",
             body:JSON.stringify({...values, categoryId:editingRow._id}),
