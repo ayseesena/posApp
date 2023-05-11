@@ -35,7 +35,7 @@ getBills();
       key: "customerPhoneNumber",
     },
     {
-      title: " Oluşturma Tarihi",
+      title: " Oluşturma Tarihi test",
       dataIndex: "createdAt",
       key: "createdAt",
        render: (text)=>{
