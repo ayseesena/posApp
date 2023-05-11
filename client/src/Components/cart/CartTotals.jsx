@@ -54,7 +54,7 @@ const CartTotals = () => {
               
         </div>
        </li>
-    )) 
+    )).reverse()
     :"Sepette Ürün Yok.."}
 
    

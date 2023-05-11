@@ -5,7 +5,8 @@ import PrintBill from "../Components/bill/PrintBill";
 
 const Bill = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-const [billItems,setBillItems] =useState()
+const [billItems,setBillItems] =useState();
+const [customer, setCustomer] = useState();
   useEffect(()=> {
 const getBills= async ()=>{
   try {
@@ -35,7 +36,7 @@ getBills();
       key: "customerPhoneNumber",
     },
     {
-      title: " Oluşturma Tarihi test",
+      title: " Oluşturma Tarihi ",
       dataIndex: "createdAt",
       key: "createdAt",
        render: (text)=>{
@@ -56,12 +57,23 @@ getBills();
         }
       },
       {
-        title: "Action",
-        dataIndex: "Action",
-        key: "Action",
-        render: (text)=>{
-          return <Button type="link" danger  className="pl-0" onClick={() => setIsModalOpen(true)}>  yazdır</Button>
-        }
+        title: "Actions",
+        dataIndex: "action",
+        key: "action",
+        render: (_, record) => {
+          return (
+            <Button
+              type="link"
+              className="pl-0"
+              onClick={() => {
+                setIsModalOpen(true);
+                setCustomer(record);
+              }}
+            >
+              Yazdır
+            </Button>
+          );
+        },
       },
   ];
 
@@ -79,7 +91,7 @@ getBills();
         />
         
       </div>
-      <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <PrintBill isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} customer={customer}/>
       {/* biz burada burdaki değerleri aldık componentine gönderdik  */}
     </>
   );
