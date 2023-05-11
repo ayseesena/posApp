@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  @apply bg-gray-50;
+<<<<<<< HEAD
+
+=======
+>>>>>>> fa0e25031 (first commit)
+  
+  /* deneme */
+  
+/* scrollbar ekranda görünmemesi için yapıldı */
+}
+.ant-btn-primary{
+  background-color: #1677ff;
+  }
+
+@media (min-width: 768px) {
+  body{
+    overflow: hidden;
+  }
+  
+    
+    .categories::-webkit-scrollbar{
+      display: none;
+    }
+  
+}
+.menu-links .anticon {
+  display: flex;
+  justify-content: center;
+}
