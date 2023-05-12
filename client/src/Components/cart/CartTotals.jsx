@@ -72,7 +72,7 @@ const CartTotals = () => {
              ₺ </span>
 
            
- (first commit)
+
         </div>
     </div>
 

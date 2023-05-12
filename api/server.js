@@ -4,6 +4,7 @@ const mongoose= require("mongoose");
 const app = express();
 const cors = require("cors");
 const dotenv= require("dotenv");
+const logger = require("morgan");
 const port = process.env.Port || 5002;
 
 // routes
@@ -30,7 +31,7 @@ await mongoose.connect(process.env.MONGO_URI)
 // middlewares
 app.use(express.json());
 app.use(cors());
-
+app.use(logger("dev"));
 app.use("/api/Categories", categoryRoute);
 app.use("/api/products", productRoute);
 app.use("/api/bills", billRoute);

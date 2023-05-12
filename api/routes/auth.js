@@ -11,7 +11,7 @@ const bcrypt = require("bcryptjs");
 router.post("/register", async(req, res)=>{   
 try{
 const {username,email,password} = req.body;
-const salt = await bcryt.genSalt(10);
+const salt = await bcrypt.genSalt(10);
 const hashedPassaword = await bcrypt.hash(password,salt);
 const newUser = new User({
     username,
@@ -31,8 +31,9 @@ router.post("/login", async(req, res)=>{
     try{
     
     const user = await User.findOne({email:req.body.email});
-    !user && res.status(404).send({ error: "kullanıcı bulunamadı!" });
-
+    if (!user) {
+      return res.status(404).send({ error: "User not found!" });
+    }
     const validPassword = await bcrypt.compare(
       req.body.password,
       user.password

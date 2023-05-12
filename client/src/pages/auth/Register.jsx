@@ -2,15 +2,39 @@ import { Button, Form, Input, message } from "antd";
 import { Link } from "react-router-dom";
 import { Carousel } from 'antd';    
 import AuthCarousel from "../../Components/auth/AuthCarousel";
-
+import { useNavigate } from "react-router-dom";
+ import { useState } from "react";
 
 const Register = () => {
+
+  const navigate = useNavigate();
+   const [loading, setLoading] = useState(false);
+
+   const onFinish = async (values) => {
+     setLoading(true);
+     try {
+       const res = await fetch("http://localhost:5002/api/auth/register", {
+         method: "POST",
+         body: JSON.stringify(values),
+         headers: { "Content-type": "application/json; charset=UTF-8" },
+       });
+       if (res.status === 200) {
+         message.success("Kayıt işlemi başarılı.");
+         navigate("/login");
+         setLoading(false);
+       }
+     } catch (error) {
+       message.error("Bir şeyler yanlış gitti.");
+       console.log(error);
+     }
+   };
+
   return (
     <div className="h-screen">
        <div className="flex justify-between h-full"> 
        <div className="xl:px-20 px-10  flex flex-col w-full h-full items-center justify-center relative">
          <h1 className="text-center text-5xl font-bold mb-2">LOGO</h1>
-         <Form layout="vertical" className="w-80">
+         <Form layout="vertical" onFinish={onFinish} className="w-80">
             <Form.Item label="Kullanıcı Adı" name={"username"} 
             rules={[
                 {
@@ -56,8 +80,8 @@ const Register = () => {
                     if (!value || getFieldValue('password') === value) {
                       return Promise.resolve();
                     }
-                    return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                  },
+                    return Promise.reject(
+                      new Error("Şifreler Aynı Olmak Zorunda!")  )                },
                 }),
 
             ]}>
@@ -71,6 +95,7 @@ const Register = () => {
                 htmlType="submit"
                 className="w-full"
                 size="large"
+                loading={loading}
                 >Kayıt ol</Button> 
             
             </Form.Item>

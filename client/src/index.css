@@ -17,16 +17,18 @@ body {
   }
 
 @media (min-width: 768px) {
-  body{
-    overflow: hidden;
-  }
+  
   
     
     .categories::-webkit-scrollbar{
       display: none;
     }
   
-}
+    .products::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
 .menu-links .anticon {
   display: flex;
   justify-content: center;

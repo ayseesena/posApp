@@ -1,17 +1,60 @@
-import { Button, Checkbox, Form, Input, message } from "antd";
-import { Link } from "react-router-dom";
-import { Carousel } from 'antd';    
+import { Button, Checkbox, Carousel, Form, Input, message } from "antd";
+import { Link,useNavigate } from "react-router-dom";
+import { useState } from "react";
 import AuthCarousel from "../../Components/auth/AuthCarousel";
 
 
 const Login = () => {
+  const navigate = useNavigate();
+   const [loading, setLoading] = useState(false);
+
+   const onFinish = async (values) => {
+     setLoading(true);
+     try {
+       const res = await fetch("http://localhost:5002/api/auth/login", {
+         method: "POST",
+         body: JSON.stringify(values),
+         headers: { "Content-type": "application/json; charset=UTF-8" },
+       });
+
+       const user = await res.json();
+
+       if (res.status === 200) {
+         localStorage.setItem(
+           "posUser",
+           JSON.stringify({
+             username: user.username,
+             email: user.email,
+           })
+         );
+         message.success("Giriş işlemi başarılı.");
+         navigate("/");
+       } else if (res.status === 404) {
+         message.error("Kullanıcı bulunamadı!");
+       } else if (res.status === 403) {
+         message.error("Şifre yanlış!");
+       }
+       setLoading(false);
+     } catch (error) {
+       message.error("Bir şeyler yanlış gitti.");
+       console.log(error);
+       setLoading(false);
+     }
+   };
   return (
     <div className="h-screen">
        <div className="flex justify-between h-full"> 
        <div className="xl:px-20 px-10  flex flex-col w-full h-full items-center justify-center relative">
          <h1 className="text-center text-5xl font-bold mb-2">LOGO</h1>
-         <Form layout="vertical" className="w-80">
-            <Form.Item label="Kullanıcı Adı" name={"username"} 
+         <Form
+             layout="vertical"
+             onFinish={onFinish}
+             initialValues={{
+               remember: false,
+             }}
+           >
+            <Form.Item label="E-mail"
+               name={"email"}
             rules={[
                 {
                     required:true,
@@ -50,7 +93,8 @@ const Login = () => {
                 htmlType="submit"
                 className="w-full"
                 size="large"
-                >Kayıt ol</Button> 
+                loading={loading}
+                >Giriş yap</Button> 
             
             </Form.Item>
          </Form>
