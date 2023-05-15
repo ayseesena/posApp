@@ -1,6 +1,7 @@
 import {  Button, Modal } from "antd";
 import { useRef } from "react";
  import { useReactToPrint } from "react-to-print";
+ import resim1 from "../img1/logo.png"
 
 const PrintBill = ({ isModalOpen, setIsModalOpen,customer }) => {
   const componentRef = useRef();
@@ -18,8 +19,8 @@ const PrintBill = ({ isModalOpen, setIsModalOpen,customer }) => {
      <section className="py-20 bg-black" ref={componentRef}>
       <div className="max-w-5xl mx-auto bg-white px-6">
         <article className="overflow-hidden">
-          <div className="logo my-6">
-            <h2 className="text-4xl font-bold text-slate-700">LOGO</h2>
+          <div className="logo w-14  mt-3 mb-2"> 
+          <img src= {resim1} ></img>
           </div>
           <div className="bill-details">
             <div className="grid sm:grid-cols-4 grid-cols-3 gap-12 ">
